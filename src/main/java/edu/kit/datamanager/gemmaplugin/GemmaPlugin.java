@@ -12,7 +12,7 @@ public class GemmaPlugin implements IMappingPlugin{
     private final Logger LOGGER = LoggerFactory.getLogger(GemmaPlugin.class);
     private static final String GEMMA_REPOSITORY = "https://github.com/kit-data-manager/gemma.git";
     private static final String GEMMA_BRANCH = "master";
-    private static final String GEMMA_DIR = "lib/gemma";
+    private static Path gemmaDir;
 
     @Override
     public String name() {
@@ -26,7 +26,7 @@ public class GemmaPlugin implements IMappingPlugin{
 
     @Override
     public String version() {
-        return "unknown";
+        return "0.1.0";
     }
 
     @Override
@@ -50,7 +50,7 @@ public class GemmaPlugin implements IMappingPlugin{
         try {
             PythonRunnerUtil.runPythonScript("-m", "pip", "install", "xmltodict", "wget");
             PythonRunnerUtil.runPythonScript("-m", new LoggerOutputStream(LOGGER, LoggerOutputStream.Level.DEBUG), new LoggerOutputStream(LOGGER, LoggerOutputStream.Level.DEBUG), "pip", "install", "xmltodict", "wget");
-            FileUtil.cloneGitRepository(GEMMA_REPOSITORY, GEMMA_DIR, GEMMA_BRANCH);
+            gemmaDir = FileUtil.cloneGitRepository(GEMMA_REPOSITORY, GEMMA_BRANCH);
         } catch (Exception e) {
            e.printStackTrace();
         }
@@ -59,6 +59,6 @@ public class GemmaPlugin implements IMappingPlugin{
     @Override
     public MappingPluginState mapFile(Path mappingFile, Path inputFile, Path outputFile) throws MappingPluginException {
         LOGGER.trace("Run gemma on '{}' with mapping '{}' -> '{}'", inputFile, mappingFile, outputFile);
-        return PythonRunnerUtil.runPythonScript(GEMMA_DIR + "/mapping_single.py", mappingFile.toString(), inputFile.toString(), outputFile.toString());
+        return PythonRunnerUtil.runPythonScript(gemmaDir + "/mapping_single.py", mappingFile.toString(), inputFile.toString(), outputFile.toString());
     }
 }
