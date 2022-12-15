@@ -57,7 +57,7 @@ public class NEPMetadataMapping implements IMappingPlugin{
 
     @Override
     public MappingPluginState mapFile(Path mappingFile, Path inputFile, Path outputFile) throws MappingPluginException {
-        LOGGER.trace("Run NEPMetadataMapping on '{}' with mapping '{}' -> '{}'", inputFile, mappingFile, outputFile);
+        LOGGER.trace("Run NEPMetadataMapping on '{}' with mapping '{}' -> '{}'", mappingFile, inputFile, outputFile);
         return PythonRunnerUtil.runPythonScript(dir + "/dicom_mapping_script.py", mappingFile.toString(), inputFile.toString(), outputFile.toString());
     }
 }
