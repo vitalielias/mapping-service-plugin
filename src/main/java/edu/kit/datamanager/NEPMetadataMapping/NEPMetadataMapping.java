@@ -48,7 +48,7 @@ public class NEPMetadataMapping implements IMappingPlugin{
     public void setup() {
         LOGGER.info("Checking and installing dependencies for NEPMetadataMapping: ");
         try {
-            PythonRunnerUtil.runPythonScript("-m", "pip", "install", "pydicom", "jsonschema");
+            PythonRunnerUtil.runPythonScript("-m", "pip", "install", "pydicom", "jsonschema", "logging", "zipfile", "typing", "datetime");
             dir = FileUtil.cloneGitRepository(REPOSITORY, BRANCH);
         } catch (Exception e) {
            e.printStackTrace();
@@ -58,6 +58,6 @@ public class NEPMetadataMapping implements IMappingPlugin{
     @Override
     public MappingPluginState mapFile(Path mappingFile, Path inputFile, Path outputFile) throws MappingPluginException {
         LOGGER.trace("Run NEPMetadataMapping on '{}' with mapping '{}' -> '{}'", inputFile, mappingFile, outputFile);
-        return PythonRunnerUtil.runPythonScript(dir + "/dicomMapping_script.py", mappingFile.toString(), inputFile.toString(), outputFile.toString());
+        return PythonRunnerUtil.runPythonScript(dir + "/dicom_mapping_script.py", mappingFile.toString(), inputFile.toString(), outputFile.toString());
     }
 }
