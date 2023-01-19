@@ -10,7 +10,7 @@ import java.nio.file.Path;
 
 public class NEPMetadataMapping implements IMappingPlugin{
     private final Logger LOGGER = LoggerFactory.getLogger(NEPMetadataMapping.class);
-    private static final String REPOSITORY = "https://github.com/nicolasblumenroehr/NEP-Metadata-Mapping-Tool.git";
+    private static final String REPOSITORY = "https://github.com/kit-data-manager/NEP-Metadata-Mapping-Tool.git";
     private static final String BRANCH = "main";
     private static Path dir;
 
