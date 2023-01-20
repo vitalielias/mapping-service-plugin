@@ -10,18 +10,18 @@ import java.nio.file.Path;
 
 public class NEPMetadataMapping implements IMappingPlugin{
     private final Logger LOGGER = LoggerFactory.getLogger(NEPMetadataMapping.class);
-    private static final String REPOSITORY = "https://github.com/kit-data-manager/NEP-Metadata-Mapping-Tool.git";
+    private static final String REPOSITORY = "https://github.com/kit-data-manager/SEM-Mapping-Tool.git";
     private static final String BRANCH = "main";
     private static Path dir;
 
     @Override
     public String name() {
-        return "NEPMetadataMapping";
+        return "SEMMetadataMapping";
     }
 
     @Override
     public String description() {
-        return "A mapping tool that facilitates metadata mapping from file formats used in the NFFA-Europe Pilot (NEP) project to JSON schemas.";
+        return "A mapping tool that facilitates metadata mapping from TIFF formats to JSON schemas.";
     }
 
     @Override
@@ -31,7 +31,7 @@ public class NEPMetadataMapping implements IMappingPlugin{
 
     @Override
     public String uri() {
-        return "https://github.com/kit-data-manager/NEP-Metadata-Mapping-Tool";
+        return "https://github.com/kit-data-manager/SEM-Mapping-Tool";
     }
 
     @Override
@@ -46,7 +46,7 @@ public class NEPMetadataMapping implements IMappingPlugin{
 
     @Override
     public void setup() {
-        LOGGER.info("Checking and installing dependencies for NEPMetadataMapping: ");
+        LOGGER.info("Checking and installing dependencies for SEM Mapping Tool: ");
         try {
             PythonRunnerUtil.runPythonScript("-m", "pip", "install", "pydicom", "jsonschema", "logging", "zipfile", "typing", "datetime");
             dir = FileUtil.cloneGitRepository(REPOSITORY, BRANCH);
